@@ -3,6 +3,9 @@ package main
 import (
   "fmt"
   "os"
+
+  "github.com/SadS4ndWiCh/apm/commands/create"
+  "github.com/SadS4ndWiCh/apm/commands/delete"
 )
 
 func main() {
@@ -21,5 +24,12 @@ apm list                  - list all available projects
     `)
 
     os.Exit(0)
+  }
+
+  switch os.Args[1] {
+  case "create":
+    os.Exit(create.CreateProjectCommand())
+  case "delete":
+    os.Exit(delete.DeleteProjectCommand())
   }
 }
