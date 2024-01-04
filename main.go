@@ -6,6 +6,7 @@ import (
 
   "github.com/SadS4ndWiCh/apm/commands/create"
   "github.com/SadS4ndWiCh/apm/commands/delete"
+  "github.com/SadS4ndWiCh/apm/commands/list"
 )
 
 func main() {
@@ -31,5 +32,7 @@ apm list                  - list all available projects
     os.Exit(create.CreateProjectCommand())
   case "delete":
     os.Exit(delete.DeleteProjectCommand())
+  case "list":
+    os.Exit(list.ListProjectsCommand())
   }
 }
