@@ -34,7 +34,5 @@ func Restart() error {
   restartCmd := exec.Command("service", "apache2", "restart")
   _, err := restartCmd.Output()
 
-  if err != nil { return err }
-
-  return nil
+  return err
 }
