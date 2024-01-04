@@ -7,6 +7,7 @@ import (
   "strings"
 
   "github.com/SadS4ndWiCh/apm/config"
+  "github.com/SadS4ndWiCh/apm/lib/apache"
 )
 
 var excludeProjects []string = []string { "000-default.conf", "default-ssl.conf" }
@@ -18,12 +19,17 @@ func ListProjectsCommand() int {
     return 1
   }
 
-  fmt.Println("Available Projects:")
+  runningProject, _ := apache.CurrentRunning()
+
+  fmt.Println("Available Projects:\n")
   for _, file := range files  {
     filename := file.Name()
     if !strings.HasSuffix(filename, ".conf") || slices.Contains(excludeProjects, filename) { continue }
 
     filename = strings.Replace(filename, ".conf", "", 1)
+    if runningProject != "" && filename == runningProject {
+      filename = fmt.Sprintf("%s - [RUNNING]", filename)
+    }
 
     fmt.Println(filename)
   }
