@@ -12,6 +12,8 @@ The first version of this application I built using Shell Script, but now I buil
 
 - [x] Create a new project
 - [x] Delete an existing project
-- [ ] Start running a project
-- [ ] Stop the currently running project
-- [ ] Restart the currently running project
+- [x] Start running a project
+- [x] Stop the currently running project
+- [x] Restart the currently running project
+- [x] List all available projects
+  - [x] Show if project is currently running
