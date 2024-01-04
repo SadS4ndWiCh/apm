@@ -4,8 +4,11 @@ import (
   "fmt"
   "os"
 
+  "github.com/SadS4ndWiCh/apm/commands/restart"
   "github.com/SadS4ndWiCh/apm/commands/create"
   "github.com/SadS4ndWiCh/apm/commands/delete"
+  "github.com/SadS4ndWiCh/apm/commands/start"
+  "github.com/SadS4ndWiCh/apm/commands/stop"
   "github.com/SadS4ndWiCh/apm/commands/list"
 )
 
@@ -34,5 +37,14 @@ apm list                  - list all available projects
     os.Exit(delete.DeleteProjectCommand())
   case "list":
     os.Exit(list.ListProjectsCommand())
+  case "start":
+    os.Exit(start.StartProjectCommand())
+  case "stop":
+    os.Exit(stop.StopProjectCommand())
+  case "restart":
+    os.Exit(restart.RestartApacheCommand())
+  default:
+    fmt.Printf("Unknow command: %s", os.Args[1])
+    os.Exit(1)
   }
 }
