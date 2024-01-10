@@ -1,6 +1,6 @@
 # 🔌 APM (Apache Project Manager)
 
-An simple CLI to manage yours Apache projects.
+A simple CLI to manage yours Apache projects.
 
 ## 🪅 About
 
