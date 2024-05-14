@@ -17,3 +17,15 @@ The first version of this application I built using Shell Script, but now I buil
 - [x] Restart the currently running project
 - [x] List all available projects
   - [x] Show if project is currently running
+
+## 📦 Download
+
+```sh
+wget -O apm.tgz https://github.com/SadS4ndWiCh/apm/releases/download/v1.0.0/linux-amd64.tgz
+```
+```sh
+tar -xvzf apm.tgz
+```
+```sh
+sudo install linux-amd64/apm /usr/local/bin
+```
