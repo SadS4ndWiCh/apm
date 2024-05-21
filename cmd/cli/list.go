@@ -6,6 +6,7 @@ import (
 	"os/user"
 	"strings"
 
+	"github.com/SadS4ndWiCh/apm/internal/consola"
 	"github.com/SadS4ndWiCh/apm/internal/goapch"
 )
 
@@ -23,25 +24,24 @@ func ListCommand() int {
 	}
 
 	runningProject, _ := goapch.CurrentRunning()
-	fmt.Println(runningProject)
 
-	fmt.Println("+-----------------+---------+")
-	fmt.Printf("| %-15s | %-7s |\n", "Project", "Status")
-	fmt.Println("+-----------------+---------+")
+	table := consola.NewTableDefault()
+	table.InsertRow([]string{"Project", "Status"})
+
 	for _, file := range files {
 		filename := strings.Replace(file.Name(), ".conf", "", 1)
 		if filename == "000-default" || filename == "default-ssl" {
 			continue
 		}
 
-		status := ""
+		status := "-"
 		if filename == runningProject {
 			status = "RUNNING"
 		}
 
-		fmt.Printf("| %-15s | %-7s |\n", filename, status)
-		fmt.Println("+-----------------+---------+")
+		table.InsertRow([]string{filename, status})
 	}
 
+	fmt.Println(table)
 	return 0
 }
