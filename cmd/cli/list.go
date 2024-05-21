@@ -2,9 +2,7 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"os/user"
-	"strings"
 
 	"github.com/SadS4ndWiCh/apm/internal/consola"
 	"github.com/SadS4ndWiCh/apm/internal/goapch"
@@ -17,29 +15,17 @@ func ListCommand() int {
 		return 1
 	}
 
-	files, err := os.ReadDir(goapch.APACHE_SITES_ROOT)
+	projects, err := goapch.GetAllProjects()
 	if err != nil {
 		fmt.Println("[-] failed to find all projects")
 		return 1
 	}
 
-	runningProject, _ := goapch.CurrentRunning()
-
 	table := consola.NewTableDefault()
 	table.InsertRow([]string{"Project", "Status"})
 
-	for _, file := range files {
-		filename := strings.Replace(file.Name(), ".conf", "", 1)
-		if filename == "000-default" || filename == "default-ssl" {
-			continue
-		}
-
-		status := "-"
-		if filename == runningProject {
-			status = "RUNNING"
-		}
-
-		table.InsertRow([]string{filename, status})
+	for _, project := range projects {
+		table.InsertRow(project)
 	}
 
 	fmt.Println(table)

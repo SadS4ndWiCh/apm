@@ -43,6 +43,32 @@ func CurrentRunning() (string, error) {
 	return fields[0], nil
 }
 
+func GetAllProjects() ([][]string, error) {
+	files, err := os.ReadDir(APACHE_SITES_ROOT)
+	if err != nil {
+		return nil, errors.New("failed to find all projects")
+	}
+
+	projects := [][]string{}
+	runningProject, _ := CurrentRunning()
+
+	for _, file := range files {
+		filename := strings.Replace(file.Name(), ".conf", "", 1)
+		if filename == "000-default" || filename == "default-ssl" {
+			continue
+		}
+
+		status := "-"
+		if filename == runningProject {
+			status = "RUNNING"
+		}
+
+		projects = append(projects, []string{filename, status})
+	}
+
+	return projects, nil
+}
+
 func IsProjectExists(projectName string) (bool, error) {
 	files, err := os.ReadDir(APACHE_SITES_ROOT)
 	if err != nil {
