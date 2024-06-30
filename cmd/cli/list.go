@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"os/user"
 
-	"github.com/SadS4ndWiCh/apm/internal/consola"
 	"github.com/SadS4ndWiCh/apm/internal/goapch"
+	"github.com/jedib0t/go-pretty/v6/table"
 )
 
 func ListCommand() int {
@@ -21,13 +22,14 @@ func ListCommand() int {
 		return 1
 	}
 
-	table := consola.NewTableDefault()
-	table.InsertRow([]string{"Project", "Status"})
+	t := table.NewWriter()
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"Project", "Status"})
 
 	for _, project := range projects {
-		table.InsertRow(project)
+		t.AppendRow(table.Row{project[0], project[1]})
 	}
 
-	fmt.Println(table)
+	t.Render()
 	return 0
 }
